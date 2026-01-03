@@ -1,7 +1,6 @@
 # config
 
 [![Go Reference][godoc-badge]][godoc-link]
-[![Go Report Card][goreport-badge]][goreport-link]
 [![License][license-badge]][license-link]
 
 `config` provides **strict, crash-safe configuration file I/O** for Go projects.
@@ -62,28 +61,28 @@ func Save[T any](path string, cfg T) error
 package main
 
 import (
-	"log"
-	"errors"
-	
-	"github.com/BinGo-Lab-Team/config/tomlio"
+  "errors"
+  "log"
+
+  "github.com/BinGo-Lab-Team/config/tomlio"
 )
 
 type Config struct {
-    Name string `toml:"name"`
-    Port int    `toml:"port"`
+  Name string `toml:"name"`
+  Port int    `toml:"port"`
 }
 
 func main() {
-	var cfg Config
-	if err := tomlio.Load("config.toml", &cfg); err != nil {
-		if errors.Is(err, tomlio.ErrUnknownKeys) {
-			// handle unknown keys
-		}
-		log.Fatal(err)
-	}
+  var cfg Config
+  if err := tomlio.Load("config.toml", &cfg); err != nil {
+    if errors.Is(err, tomlio.ErrUnknownKeys) {
+      // handle unknown keys
+    }
+    log.Fatal(err)
+  }
 
-	cfg.Port = 8081
-	_ = tomlio.Save("config.toml", cfg)
+  cfg.Port = 8081
+  _ = tomlio.Save("config.toml", cfg)
 }
 ```
 
@@ -99,9 +98,6 @@ This project released under [MIT License](./LICENSE)
 
 [godoc-badge]: https://pkg.go.dev/badge/github.com/BinGo-Lab-Team/config.svg
 [godoc-link]: https://pkg.go.dev/github.com/BinGo-Lab-Team/config
-
-[goreport-badge]: https://goreportcard.com/badge/github.com/BinGo-Lab-Team/config
-[goreport-link]: https://goreportcard.com/report/github.com/BinGo-Lab-Team/config
 
 [license-badge]: https://img.shields.io/github/license/BinGo-Lab-Team/config
 [license-link]: https://github.com/BinGo-Lab-Team/config/blob/main/LICENSE
